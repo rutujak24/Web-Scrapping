@@ -3,7 +3,7 @@ import json
 serviceurl = "http://maps.googleapis.com/maps/api/geocode/json?"
 
 while True:
-	address = input("Enter location:")
+	address = input("Enter location:") #Universitas Gadjah Mada
 	if len(address) <1: break
 	
 	url = serviceurl+ urllib.urlencode ({"sensor": "false,", "address":address})
