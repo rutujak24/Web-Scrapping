@@ -1,17 +1,26 @@
-import urllib
+import urllib.request as ur
 import json
 
-url = input("Enter json URL: ")
-# http://py4e-data.dr-chuck.net/comments_458707.json
-connection = urllib.urlopen(url)
-raw_data = connection.read()
-parsed_data = json.loads(raw_data)
-counts = []
+# json_url = 'http://python-data.dr-chuck.net/comments_42.json'
 
-comments = parsed_data["comments"]
+json_url = input("Enter location: ")
+print("Retrieving ", json_url)
+data = ur.urlopen(json_url).read().decode('utf-8')
+print('Retrieved', len(data), 'characters')
+json_obj = json.loads(data)
 
-for comment in comments:
-    counts.append(comment['count'])
+sum = 0
+total_number = 0
 
-print ("Count: {0}".format(len(counts)))
-print ("Sum: {0}".format(sum(counts)))
+for comment in json_obj["comments"]:
+    sum += int(comment["count"])
+    total_number += 1
+
+print('Count:', total_number)
+print('Sum:', sum)
+
+''' Enter location:  http://py4e-data.dr-chuck.net/comments_458707.json
+Retrieving  http://py4e-data.dr-chuck.net/comments_458707.json
+Retrieved 2715 characters
+Count: 50
+Sum: 2762         '''
